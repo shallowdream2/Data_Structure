@@ -98,7 +98,7 @@ void guest::Run()
         else if (cnt >= 50 && cnt < 75)//按id查询
         {
             cout<<"2"<<endl;
-            int index = rand()%(gTrans.length);
+            unsigned int index = rand()%(gTrans.length);
             msgNode temp("2",gTrans.TRANS[index]);
             temp.sendmsg(target[cnt & 1]);
         }

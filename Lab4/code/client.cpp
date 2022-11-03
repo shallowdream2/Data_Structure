@@ -7,7 +7,7 @@ int main()
     string database="D:\\Working\\Project\\HomeWork\\Data_Structure\\Lab4\\demo\\demo\\";
     vector<string>t;
     t.push_back(dir1);
-    t.push_back(dir2);
+    t.push_back(dir1);
     guest myGuest(t,database+"transactions.csv",200);
     myGuest.Run();
     system("pause");

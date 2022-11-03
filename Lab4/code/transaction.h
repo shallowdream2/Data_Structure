@@ -146,6 +146,8 @@ void transaction::set_data(string str_d)//按txid设置input和output
             insert_input(input(prev_block, prevTxID, index,str2));
         }
     }
+    f1.close();
+    f1.clear();
     getline(f2, str);
     while (getline(f2, str))
     {
@@ -174,6 +176,9 @@ void transaction::set_data(string str_d)//按txid设置input和output
             insert_output(output(txid,index,value,str2));
         }
     }
+    f2.close();
+    f2.clear();
+    
 
 }
 #endif

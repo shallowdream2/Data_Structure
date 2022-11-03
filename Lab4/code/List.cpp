@@ -76,7 +76,7 @@ transaction *List::search_transaction(string txID)
 {
     Node *p = head->next;
 
-    while (p->next != head)
+    while (p!= head)
     {
         
         int index = p->data.search_trans_index(txID);

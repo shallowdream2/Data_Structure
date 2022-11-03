@@ -18,9 +18,9 @@ block::block()
 
 int block::search_trans_index(string txid)
 {
-   for (int i = 0; i < size; ++i)
+   for (int i = 0; i < Trans.size(); ++i)
    {
-      if (txid == transactions[i].txid)
+      if (txid == Trans[i])
          return i;
    }
    return -1;
@@ -53,7 +53,7 @@ void block::set_data(string data_base)
    {
       if (i == len)
          break;
-      ++i;
+      
       int height;
       string txid;
       int is_coinbase;
@@ -79,5 +79,6 @@ void block::set_data(string data_base)
          transactions[i]=transaction(txid, is_coinbase, input_count, output_count);
          transactions[i].set_data(data_base);
       }
+      ++i;
    }
 }
