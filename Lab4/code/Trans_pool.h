@@ -18,6 +18,7 @@ public:
         return 1;
     }
     int Del(string id);
+    int DEL(vector<string> &id);
     vector<string> get_trans(int n);
     int exist(string id);
 };
@@ -55,5 +56,13 @@ int Trans_pool::exist(string id)
         if(i==id)return 1;
     }
     return 0;
+}
+int Trans_pool::DEL(vector<string>&id)
+{
+    for (auto i = id.begin(); i != id.end(); ++i)
+    {
+        Del(*i);
+    }
+    return 1;
 }
 #endif
