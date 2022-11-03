@@ -64,6 +64,8 @@ void server::Run()
                     node->data = b;
                     node->data.height = L.length;
                     L.insert(node, L.length + 1); //插入区块
+                    //更新交易池
+                    myTrans.update(b.Trans);
                 }
             }
             else
