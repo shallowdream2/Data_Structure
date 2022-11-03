@@ -40,7 +40,7 @@ void List::del(int i)
 {
     Node *p = head;
     int j = 0;
-    while (j < i-1 && p->next != head) //找到i节点的前驱
+    while (j < i - 1 && p->next != head) //找到i节点的前驱
     {
         p = p->next;
         j++;
@@ -50,7 +50,7 @@ void List::del(int i)
         cout << "error delete" << endl;
         return;
     }
-    Node *temp=p->next;
+    Node *temp = p->next;
     p->next = p->next->next;
     p->next->pre = p;
 
@@ -76,18 +76,16 @@ transaction *List::search_transaction(string txID)
 {
     Node *p = head->next;
 
-    while (p!= head)
+    while (p != head)
     {
-        
+
         int index = p->data.search_trans_index(txID);
-        
+
         if (index != -1)
         {
             return p->data.transactions + index;
         }
-        p=p->next;
-        
-       
+        p = p->next;
     }
 
     return NULL; //表示没有找到
@@ -119,81 +117,80 @@ int List::getLegal()
             }
             count += flag;
         }
-        p=p->next;
+        p = p->next;
     }
-    
 
     return count;
-    
 }
 
 void List::display()
 {
-    cout<<"length: "<<length<<endl;
+    cout << "length: " << length << endl;
     Node *p = head->next;
-    while (p!= head)
+    while (p != head)
     {
-        cout<<"height:"<<p->data.height<<endl<<"hash: "<<p->data.hash<<"\n\n";
+        cout << "height:" << p->data.height << endl
+             << "hash: " << p->data.hash << "\n\n";
         p = p->next;
     }
 }
 
-
 int List::getIllegal()
 {
-    Node*p=head->next;
-    int sum=0;
-    for(int i=1;i<=length;++i)
+    Node *p = head->next;
+    int sum = 0;
+    for (int i = 1; i <= length; ++i)
     {
-        for(int j=0;j<p->data.size;++j)
-            sum+=!(p->data.transactions[j].legal);
-        p=p->next;
+        for (int j = 0; j < p->data.size; ++j)
+            sum += !(p->data.transactions[j].legal);
+        p = p->next;
     }
     return sum;
 }
 
-void List::clear(){
-    while(length>0)
+void List::clear()
+{
+    while (length > 0)
     {
         del(1);
     }
 }
 
-block List::push_newNode(vector<string>Trans)
+block List::push_newNode(vector<string> Trans)
 {
-    hash<int>h;
-    Node* node = new Node;
-    node->data.preHash=rear->data.hash;
-    node->data.hash = to_string(h(rand()));//随机哈希值
+    hash<int> h;
+    Node *node = new Node;
+    node->data.preHash = rear->data.hash;
+    node->data.hash = to_string(h(rand())); //随机哈希值
     node->data.height = length;
-    node->data.Trans=Trans;
+    node->data.Trans = Trans;
 
     node->next = head;
     head->pre = node;
     rear->next = node; //指向x
     node->pre = rear;
-    rear=node;
+    rear = node;
     length++;
     return node->data;
 }
 
-int List::exist(block& b)
+int List::exist(block &b)
 {
-    Node* p = head;
-    for(int i=0;i<length;++i)
+    Node *p = head;
+    for (int i = 0; i < length; ++i)
     {
-        p=p->next;
-        if(p->data.preHash==b.preHash)return 1;
+        p = p->next;
+        if (p->data.preHash == b.preHash)
+            return 1;
     }
-    return  0;
+    return 0;
 }
 void List::set_data(string database)
 {
-    Node* p = head;
-    for(int i=0;i<length;++i)
+    Node *p = head->next;
+    while (p != head)
     {
-        p=p->next;
         p->data.set_data(database);
+        p=p->next;
     }
-    
 }

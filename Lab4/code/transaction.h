@@ -114,6 +114,12 @@ void transaction::set_data(string str_d)//按txid设置input和output
 {
     ifstream f1(str_d+"inputs.csv");
     ifstream f2(str_d+"outputs.csv");
+    while (f1.fail()||f2.fail())
+    {
+        f1.open(str_d+"inputs.csv");
+        f2.open(str_d+"outputs.csv");
+    }
+    
     string str;
     getline(f1,str);
     while(getline(f1,str))

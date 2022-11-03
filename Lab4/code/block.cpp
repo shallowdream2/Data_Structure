@@ -20,7 +20,7 @@ int block::search_trans_index(string txid)
 {
    for (int i = 0; i < Trans.size(); ++i)
    {
-      if (txid == Trans[i])
+      if (txid == transactions[i].txid)
          return i;
    }
    return -1;
@@ -45,6 +45,11 @@ void block::display()
 void block::set_data(string data_base)
 {
    ifstream file(data_base+"transactions.csv");
+   while(file.fail())
+   {
+      file.open(data_base+"transactions.csv");
+   }
+   
    int len = Trans.size();
    int i = 0;
    string str;
@@ -78,7 +83,10 @@ void block::set_data(string data_base)
       {
          transactions[i]=transaction(txid, is_coinbase, input_count, output_count);
          transactions[i].set_data(data_base);
+         ++i;
       }
-      ++i;
+      
    }
+   file.close();
+   file.clear();
 }
